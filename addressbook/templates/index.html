@@ -1,0 +1,151 @@
+<html>
+    {% include "addnew_modal.html" %}
+    {% include "edit_modal.html" %}
+    {% include "delete_modal.html" %}   
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <center><H1>Addresses</H1></center>
+
+    <style>
+        table, th, td {
+        border: 1px solid black;
+        }
+    </style>
+
+    
+    <br>
+    <div class="container">
+        <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#exampleModal" onclick="clearnewform();">
+        Add
+        </button>
+            
+    <table id="addresses" class="table table-hover">
+        <thead>
+            <tr>
+
+                <th class="hidden" scope="col">#</th>
+                <th scope="col" style="color:Tomato;">First Name</th>
+                <th scope="col" style="color:Tomato;">Last Name</th>
+                <th scope="col" style="color:Tomato;">Phone</th>
+                <th scope="col" style="color:Tomato;">Address</th>
+                <th scope="col" style="color:Tomato;">City</th>
+                <th scope="col" style="color:Tomato;">State</th>
+                <th scope="col" style="color:Tomato;">Country</th>
+                <th scope="col" style="color:Tomato;">Zipcode</th>
+                <th scope="col" style="color:Tomato;">Email</th>
+                <th scope="col" style="color:Tomato;">Create Date</th>
+                <th scope="col" style="color:Tomato;">Modified Date</th>
+                <th scope="col" style="color:Tomato;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+                {% for a in addresses %}
+            <tr>
+                <td class="hidden" {{ a.id }}></td>
+                <td>{{ a.first_name }}</td>
+                <td>{{ a.last_name }}</td>
+                <td>{{ a.phone }}</td>
+                <td>{{ a.address }}</td>
+                <td>{{ a.city }}</td>
+                <td>{{ a.state }}</td>
+                <td>{{ a.country }}</td>
+                <td>{{ a.zipcode }}</td>
+                <td>{{ a.email }}</td>
+                <td>{{ a.create_date }}</td>
+                <td>{{ a.modified_date }}</td>
+                <td>
+                    <div class="btn-group">
+                        <button class="btn btn-default btn-sm dropdown-toggle glyphicon glyphicon-wrench" data-toggle="dropdown" id="menu1" type="button" aria-expanded="true">
+                            <span class="caret"></span>
+                        </button>
+                        <ul aria-labelledby="menu1" class="dropdown-menu" role="menu">
+                            <li role="presentation">
+                                <a data-target="#editmodal" data-toggle="modal" href="#" role="menuitem" tabindex="-1">
+                                    Edit
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a data-target="#delmodal" data-toggle="modal" href="#" role="menuitem" tabindex="-1">
+                                    Delete
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    
+</html>
+<script>
+
+
+// Edit Modal
+$(document).ready(function()
+  {
+    var rows = $( "#addresses tbody tr" );
+    for (i = 0; i < rows.length; i++) { rows[i].onclick = function()
+    {
+    //console.log(rows[1]);
+
+      //retrieve the values based on the rows
+      $("input[name='id']").val(this.getElementsByTagName("td")[0].innerHTML);
+      $("input[name='first_name']").val(this.getElementsByTagName("td")[1].innerHTML);
+      $("input[name='last_name']").val(this.getElementsByTagName("td")[2].innerHTML);
+      $("input[name='phone']").val(this.getElementsByTagName("td")[3].innerHTML);
+      $("input[name='address']").val(this.getElementsByTagName("td")[4].innerHTML);
+      $("input[name='city']").val(this.getElementsByTagName("td")[4].innerHTML);
+      $("input[name='state']").val(this.getElementsByTagName("td")[4].innerHTML);
+      $("input[name='country']").val(this.getElementsByTagName("td")[4].innerHTML);
+      $("input[name='zipcode']").val(this.getElementsByTagName("td")[4].innerHTML);
+      $("input[name='email']").val(this.getElementsByTagName("td")[4].innerHTML);
+      $("input[name='create_date']").val(this.getElementsByTagName("td")[4].innerHTML);
+      $("input[name='modified_date']").val(this.getElementsByTagName("td")[4].innerHTML);
+
+      }
+    }
+  });
+function clearnewform(){
+  $("input[name='id']").val('');
+  $("input[name='first_name']").val('');
+  $("input[name='last_name']").val('');
+  $("input[name='phone']").val('');
+  $("input[name='address']").val('');
+  $("input[name='city']").val('');
+  $("input[name='state']").val('');
+  $("input[name='country']").val('');
+  $("input[name='zipcode']").val('');
+  $("input[name='email']").val('');
+  $("input[name='create_date']").val('');
+  $("input[name='modified_dates']").val('');
+ };
+
+//End Edit Modal
+
+//Delete Modal
+$(document).ready(function()
+  {
+    var rows = $( "#addresses tbody tr" );
+    for (i = 0; i < rows.length; i++) { rows[i].onclick = function()
+    {
+    //console.log(rows[1]);
+
+      //retrieve the values based on the rows
+      $("input[name='id']").val(this.getElementsByTagName("td")[0].innerHTML);
+      }
+    }
+  });
+function clearnewform(){
+  $("input[name='id']").val('');
+ };
+ //End Delete Modal
+</script>
